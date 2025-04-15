@@ -54,6 +54,7 @@
       <div class="nav-item">
         <CalendarIcon size="1x" aria-hidden="true" role="img" />
         <date-picker
+          v-if="datePickerLang"
           v-model="dateTimeRange"
           type="datetime"
           format="YYYY-MM-DD HH:mm"
@@ -66,6 +67,7 @@
           :shortcuts="shortcuts"
           :show-time-panel="showTimeRangePanel"
           :disabled-date="(date, _) => date > new Date()"
+          :lang="datePickerLang"
           @change="handleDateTimeRangeChange"
         >
           <template v-slot:footer>
@@ -293,6 +295,7 @@ export default {
         },
       ],
       showTimeRangePanel: false,
+      datePickerLang: null,
     };
   },
   computed: {
@@ -362,7 +365,36 @@ export default {
       this.showTimeRangePanel = false;
     },
   },
+  async created() {
+    const fullLocale = navigator.language || 'en';
+    const shortLocale = fullLocale.split('-')[0];
+    this.datePickerLang = await loadDatepickerLocale(shortLocale);
+  }
 };
+
+async function loadDatepickerLocale(localeCode) {
+  const supported = ["cs", "da", "de", "es", "fr", "tr", "en"];
+  if (!supported.includes(localeCode)) {
+    localeCode = "en";
+  }
+  switch (localeCode) {
+    case "cs":
+      return (await import("vue2-datepicker/locale/cs")).default;
+    case "da":
+      return (await import("vue2-datepicker/locale/da")).default;
+    case "de":
+      return (await import("vue2-datepicker/locale/de")).default;
+    case "es":
+      return (await import("vue2-datepicker/locale/es")).default;
+    case "fr":
+      return (await import("vue2-datepicker/locale/fr")).default;
+    case "tr":
+      return (await import("vue2-datepicker/locale/tr")).default;
+    case "en":
+    default:
+      return (await import("vue2-datepicker/locale/en")).default;
+  }
+}
 </script>
 
 <style lang="scss" scoped>
