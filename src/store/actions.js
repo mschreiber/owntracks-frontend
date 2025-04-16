@@ -130,16 +130,21 @@ const _getTravelStats = (locationHistory) => {
   Object.keys(locationHistory).forEach((user) => {
     Object.keys(locationHistory[user]).forEach((device) => {
       let lastLatLng = null;
+      let lastAlt = null;
       locationHistory[user][device].forEach((location) => {
         if (
           config.filters.minAccuracy !== null &&
           location.acc > config.filters.minAccuracy
         )
           return;
-        const latLng = L.latLng(location.lat, location.lon, location.alt ?? 0);
+        const latLng = L.latLng(location.lat, location.lon, location.alt);
         if (lastLatLng !== null) {
           const distance = distanceBetweenCoordinates(lastLatLng, latLng);
-          const elevationChange = latLng.alt - lastLatLng.alt;
+          // calculate the elevationChange only if there is an alt available
+          let elevationChange = 0;
+          if (lastAlt != null && latLng.alt != null) {
+            elevationChange = latLng.alt - lastAlt;
+          }
           if (
             typeof config.map.maxPointDistance === "number" &&
             config.map.maxPointDistance > 0
@@ -152,6 +157,9 @@ const _getTravelStats = (locationHistory) => {
             if (elevationChange >= 0) elevationGain += elevationChange;
             else elevationLoss += -elevationChange;
           }
+        }
+        if (latLng.alt != null) {
+          lastAlt = latLng.alt;
         }
         lastLatLng = latLng;
       });
