@@ -366,8 +366,8 @@ export default {
     },
   },
   async created() {
-    const fullLocale = navigator.language || 'en';
-    const shortLocale = fullLocale.split('-')[0];
+    const fullLocale = this.$config.locale || "en";
+    const shortLocale = fullLocale.split("-")[0];
     this.datePickerLang = await loadDatepickerLocale(shortLocale);
   }
 };
