@@ -17,6 +17,7 @@
   "Show location history (line)": "Zeige Standortverlauf (Linie)",
   "Show location history (points)": "Zeige Standortverlauf (Punkte)",
   "Show location heatmap": "Zeige Standort-Heatmap",
+  "Show location fogmap": "Zeige Standort-Nebelkarte",
   "Minify JSON": "JSON minimieren",
   "Copy to clipboard": "In die Zwischenablage kopieren",
   "Loading version...": "Version wird abgerufen...",

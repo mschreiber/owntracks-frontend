@@ -127,6 +127,14 @@
         :gradient="heatmap.gradient"
       />
     </template>
+
+    <template v-if="map.layers.fogmap">
+      <LFogmap
+        v-if="filteredLocationHistoryLatLngs.length"
+        :lat-lng="filteredLocationHistoryLatLngs"
+        :zoomAnimation=true
+      />
+    </template>
   </LMap>
 </template>
 
@@ -148,6 +156,7 @@ import "leaflet/dist/leaflet.css";
 import * as types from "@/store/mutation-types";
 import LCustomMarker from "@/components/LCustomMarker";
 import LHeatmap from "@/components/LHeatmap.vue";
+import LFogmap from "@/components/LFogmap.vue";
 import LDeviceLocationPopup from "@/components/LDeviceLocationPopup.vue";
 
 export default {
@@ -163,6 +172,7 @@ export default {
     LDeviceLocationPopup,
     LHeatmap,
     LTooltip,
+    LFogmap,
   },
   data() {
     return {
@@ -170,6 +180,7 @@ export default {
       center: this.$store.state.map.center,
       controls: this.$config.map.controls,
       heatmap: this.$config.map.heatmap,
+      fogmap: this.$config.map.fogmap,
       markerIcon: LCustomMarker,
       maxZoom: this.$config.map.maxZoom,
       maxNativeZoom: this.$config.map.maxNativeZoom,
@@ -230,7 +241,8 @@ export default {
         (this.map.layers.line ||
           this.map.layers.points ||
           this.map.layers.poi ||
-          this.map.layers.heatmap) &&
+          this.map.layers.heatmap ||
+          this.map.layers.fogmap) &&
         this.filteredLocationHistoryLatLngs.length > 0
       ) {
         this.$refs.map.mapObject.fitBounds(

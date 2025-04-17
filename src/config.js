@@ -51,12 +51,16 @@ const DEFAULT_CONFIG = {
       max: 20,
       radius: 25,
     },
+    fogmap: {
+      zoomAnimation: true,
+    },
     layers: {
       heatmap: false,
       last: true,
       line: true,
       poi: true,
       points: false,
+      fogmap: false,
     },
     maxNativeZoom: 19,
     maxPointDistance: null,

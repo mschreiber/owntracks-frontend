@@ -192,6 +192,7 @@ export default {
         { layer: "points", label: this.$t("Show location history (points)") },
         { layer: "heatmap", label: this.$t("Show location heatmap") },
         { layer: "poi", label: this.$t("Show points of interest") },
+        { layer: "fogmap", label: this.$t("Show location fogmap") },
       ],
       showMobileNav: false,
       shortcuts: [
