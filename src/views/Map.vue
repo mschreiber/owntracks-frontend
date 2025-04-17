@@ -132,7 +132,13 @@
       <LFogmap
         v-if="filteredLocationHistoryLatLngs.length"
         :lat-lng="filteredLocationHistoryLatLngs"
-        :zoomAnimation=true
+        :zoomAnimation="fogmap.zoomAnimation"
+        :radius="fogmap.radius"
+        :patternSize="fogmap.patternSize"
+        :exploredFogOpacity="fogmap.exploredFogOpacity"
+        :exploredFogColor="fogmap.exploredFogColor"
+        :unexploredFogOpacity="fogmap.unexploredFogOpacity"
+        :unexploredFogColor="fogmap.unexploredFogColor"
       />
     </template>
   </LMap>

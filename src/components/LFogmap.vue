@@ -22,6 +22,36 @@ const props = {
     custom: true,
     default: true,
   },
+  radius: {
+    type: Number,
+    custom: true,
+    default: 10,
+  },
+  patternSize: {
+    type: Number,
+    custom: true,
+    default: 100,
+  },
+  exploredFogColor: {
+    type: String,
+    custom: true,
+    default: "#000",
+  },
+  exploredFogOpacity: {
+    type: Number,
+    custom: true,
+    default: 0.9,
+  },
+  unexploredFogColor: {
+    type: String,
+    custom: true,
+    default: "#000",
+  },
+  unexploredFogOpacity: {
+    type: Number,
+    custom: true,
+    default: 0.8,
+  },
   visible: {
     type: Boolean,
     custom: true,
@@ -35,6 +65,24 @@ export default {
     const options = {};
     if (this.zoomAnimation) {
       options.zoomAnimation = this.zoomAnimation;
+    }
+    if (this.radius) {
+      options.radius = this.radius;
+    }
+    if (this.patternSize) {
+      options.patternSize = this.patternSize;
+    }
+    if (this.exploredFogColor) {
+      options.exploredFogColor = this.exploredFogColor;
+    }
+    if (this.exploredFogOpacity) {
+      options.exploredFogOpacity = this.exploredFogOpacity;
+    }
+    if (this.unexploredFogColor) {
+      options.unexploredFogColor = this.unexploredFogColor;
+    }
+    if (this.unexploredFogOpacity) {
+      options.unexploredFogOpacity = this.unexploredFogOpacity;
     }
     this.mapObject = L.fogLayer(this.latLng, options);
     DomEvent.on(this.mapObject, this.$listeners);
@@ -63,6 +111,24 @@ export default {
       } else {
         this.parentContainer.removeLayer(this);
       }
+    },
+    setPatternSize(patternSize) {
+      this.mapObject.setOptions({ patternSize });
+    },
+    setRadius(radius) {
+      this.mapObject.setOptions({ radius });
+    },
+    setExploredFogColor(exploredFogColor) {
+      this.mapObject.setOptions({ exploredFogColor });
+    },
+    setExploredFogOpacity(exploredFogOpacity) {
+      this.mapObject.setOptions({ exploredFogOpacity });
+    },
+    setUnexploredFogColor(unexploredFogColor) {
+      this.mapObject.setOptions({ unexploredFogColor });
+    },
+    setUnexploredFogOpacity(unexploredFogOpacity) {
+      this.mapObject.setOptions({ unexploredFogOpacity });
     },
     addLatLng(value) {
       this.mapObject.addLatLng(value);

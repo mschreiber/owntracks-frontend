@@ -44,6 +44,12 @@ interface Config {
     };
     fogmap: {
       zoomAnimation: boolean;
+      patternSize: number;
+      radius: number;
+      exploredFogColor: Color;
+      exploredFogOpacity: number;
+      unexploredFogColor: Color;
+      unexploredFogOpacity: number;
     };
     layers: {
       heatmap: boolean;
@@ -239,10 +245,14 @@ interface QueryParams {
 }
 
 /** Callback for new WebSocket location messages. */
-interface WebSocketLocationCallback { (): void }
+interface WebSocketLocationCallback {
+  (): void;
+}
 
 /** Function for lazy evaluation of log messages. */
-interface LogMessageFunction { (): string }
+interface LogMessageFunction {
+  (): string;
+}
 
 /** A CSS color. */
 type Color = string;

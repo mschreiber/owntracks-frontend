@@ -49,12 +49,21 @@ window.owntracks.config = {};
     - [`gradient`](#mapheatmapgradient)
     - [`max`](#mapheatmapmax)
     - [`radius`](#mapheatmapradius)
+  - `fogmap`
+    - [`zoomAnimation`](#mapfogmapzoomanimation)
+    - [`patternSize`](#mapfogmpatternSize)
+    - [`radius`](#mapfogmapradius)
+    - [`unexploredFogColor`](#mapfogunexploredfogcolor)
+    - [`unexploredFogOpacity`](#mapfogunexploredfogopacity)
+    - [`exploredFogColor`](#mapfogmapexploredfogcolor)
+    - [`exploredFogOpacity`](#mapfogmapexploredfogopacity)
   - `layers`
     - [`heatmap`](#maplayersheatmap)
     - [`last`](#maplayerslast)
     - [`line`](#maplayersline)
     - [`poi`](#maplayerspoi)
     - [`points`](#maplayerspoints)
+    - [`fogmap`](#maplayersfogmap)
   - [`maxNativeZoom`](#mapmaxnativezoom)
   - [`maxPointDistance`](#mapmaxpointdistance)
   - [`maxZoom`](#mapmaxzoom)
@@ -318,9 +327,65 @@ Heatmap point radius.
 - Type: [`Number`]
 - Default: `25`
 
+### `map.fogmap.zoomAnimation`
+
+Whether do zoom animation in the fogmap.
+
+- Type: [`Boolean`]
+- Default: `true`
+
+### `map.fogmap.patternSize`
+
+The size of the pattern in the fogmap.
+
+- Type: [`Number`]
+- Default: `100`
+
+### `map.fogmap.radius`
+
+Fogmap point radius.
+
+- Type: [`Number`]
+- Default: `10`
+
+### `map.fogmap.exploredFogColor`
+
+The fog color of explored points.
+
+- Type: [`String`]
+- Default: `#000`
+
+### `map.fogmap.exploredFogOpacity`
+
+The fog opacity of explored points.
+
+- Type: [`Number`]
+- Default: `0.8`
+
+### `map.fogmap.unexploredFogColor`
+
+The fog color of the unexplored area.
+
+- Type: [`String`]
+- Default: `#000`
+
+### `map.fogmap.unexploredFogOpacity`
+
+The fog opacity of the unexplored area.
+
+- Type: [`Number`]
+- Default: `0.9`
+
 ### `map.layers.heatmap`
 
 Initial visibility of the heatmap layer.
+
+- Type: [`Boolean`]
+- Default: `false`
+
+### `map.layers.fogmap`
+
+Initial visibility of the fogmap layer.
 
 - Type: [`Boolean`]
 - Default: `false`

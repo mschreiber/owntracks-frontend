@@ -53,6 +53,12 @@ const DEFAULT_CONFIG = {
     },
     fogmap: {
       zoomAnimation: true,
+      patternSize: 100,
+      radius: 10,
+      exploredFogColor: "#000",
+      exploredFogOpacity: 0.8,
+      unexploredFogColor: "#000",
+      unexploredFogOpacity: 0.9,
     },
     layers: {
       heatmap: false,

@@ -73,8 +73,7 @@ L.FogLayer = (L.Layer ? L.Layer : L.Class).extend({
     var size = this._map.getSize();
     canvas.width = size.x;
     canvas.height = size.y;
-
-    var animated = this._map.options.zoomAnimation && L.Browser.any3d;
+    var animated = this.options.zoomAnimation && L.Browser.any3d;
     L.DomUtil.addClass(
       canvas,
       "leaflet-zoom-" + (animated ? "animated" : "hide")
@@ -90,7 +89,7 @@ L.FogLayer = (L.Layer ? L.Layer : L.Class).extend({
   _redraw: function () {
     var p,
       size = this._map.getSize(),
-      patternSize = 100,
+      patternSize = this.options.patternSize,
       ctx = this._canvas.getContext("2d");
 
     ctx.globalCompositeOperation = "source-over";
@@ -116,7 +115,12 @@ L.FogLayer = (L.Layer ? L.Layer : L.Class).extend({
     }
 
     ctx.globalCompositeOperation = "source-in";
-    ctx.fillStyle = "rgba(0, 0, 0, 0.8)"; //change color
+
+    ctx.fillStyle = hexToRgba(
+      this.options.unexploredFogColor,
+      this.options.unexploredFogOpacity
+    );
+
     ctx.fillRect(0, 0, this._canvas.width, this._canvas.height);
     ctx.globalCompositeOperation = "source-over";
 
@@ -128,7 +132,11 @@ L.FogLayer = (L.Layer ? L.Layer : L.Class).extend({
     }
 
     ctx.globalCompositeOperation = "xor";
-    ctx.fillStyle = "rgba(0, 0, 0, 0.9)"; //fog color
+    ctx.fillStyle = hexToRgba(
+      this.options.exploredFogColor,
+      this.options.exploredFogOpacity
+    );
+
     ctx.fillRect(0, 0, this._canvas.width, this._canvas.height);
   },
   getPattern: function (size) {
@@ -139,7 +147,7 @@ L.FogLayer = (L.Layer ? L.Layer : L.Class).extend({
 
     var size5 = Math.round(size / 5);
     var size80 = size - 2 * size5;
-    var cornerRadius = 10;
+    var cornerRadius = this.options.radius;
 
     ctx.lineJoin = "round";
     ctx.lineWidth = cornerRadius;
@@ -188,3 +196,22 @@ L.FogLayer = (L.Layer ? L.Layer : L.Class).extend({
 L.fogLayer = function (latlngs, options) {
   return new L.FogLayer(latlngs, options);
 };
+
+function hexToRgba(hex, alpha) {
+  // Entfernt das "#" wenn vorhanden
+  hex = hex.replace(/^#/, "");
+
+  // Wandelt kurze Hex-Codes (#000) in lange (#000000) um
+  if (hex.length === 3) {
+    hex = hex
+      .split("")
+      .map((c) => c + c)
+      .join("");
+  }
+
+  // Extrahiere die R, G, B Werte
+  const r = parseInt(hex.substring(0, 2), 16);
+  const g = parseInt(hex.substring(2, 4), 16);
+  const b = parseInt(hex.substring(4, 6), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
