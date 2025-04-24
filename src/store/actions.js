@@ -142,7 +142,7 @@ const _getTravelStats = (locationHistory) => {
           const distance = distanceBetweenCoordinates(lastLatLng, latLng);
           // calculate the elevationChange only if there is an alt available
           let elevationChange = 0;
-          if (lastAlt != null && latLng.alt != null) {
+          if (lastAlt !== null && latLng.alt !== null) {
             elevationChange = latLng.alt - lastAlt;
           }
           if (
