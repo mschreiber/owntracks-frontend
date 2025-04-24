@@ -158,7 +158,7 @@ const _getTravelStats = (locationHistory) => {
             else elevationLoss += -elevationChange;
           }
         }
-        if (latLng.alt != null) {
+        if (latLng.alt !== null) {
           lastAlt = latLng.alt;
         }
         lastLatLng = latLng;
