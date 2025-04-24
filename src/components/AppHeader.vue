@@ -54,7 +54,6 @@
       <div class="nav-item">
         <CalendarIcon size="1x" aria-hidden="true" role="img" />
         <date-picker
-          v-if="datePickerLang"
           v-model="dateTimeRange"
           type="datetime"
           format="YYYY-MM-DD HH:mm"
