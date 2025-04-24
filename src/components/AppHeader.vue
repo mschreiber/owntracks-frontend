@@ -377,23 +377,7 @@ async function loadDatepickerLocale(localeCode) {
   if (!supported.includes(localeCode)) {
     localeCode = "en";
   }
-  switch (localeCode) {
-    case "cs":
-      return (await import("vue2-datepicker/locale/cs")).default;
-    case "da":
-      return (await import("vue2-datepicker/locale/da")).default;
-    case "de":
-      return (await import("vue2-datepicker/locale/de")).default;
-    case "es":
-      return (await import("vue2-datepicker/locale/es")).default;
-    case "fr":
-      return (await import("vue2-datepicker/locale/fr")).default;
-    case "tr":
-      return (await import("vue2-datepicker/locale/tr")).default;
-    case "en":
-    default:
-      return (await import("vue2-datepicker/locale/en")).default;
-  }
+  return (await import(`vue2-datepicker/locale/${localeCode}`)).default;
 }
 </script>
 
