@@ -122,7 +122,8 @@ const getLastLocations = async ({ commit, state }) => {
   commit(types.SET_LAST_LOCATIONS, lastLocations);
 };
 
-const _getTravelStats = (locationHistory) => {
+// Export for testing purposes only 
+export const _getTravelStats = (locationHistory) => {
   const start = Date.now();
   let distanceTravelled = 0;
   let elevationGain = 0;
